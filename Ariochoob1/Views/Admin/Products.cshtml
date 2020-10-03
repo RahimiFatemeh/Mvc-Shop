@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Ariochoob1.Models.DomainModels.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/MyStyle.css" rel="stylesheet" />
+
+<br />
+<br />
+<h2>محصولات</h2>
+<br />
+ @using (Html.BeginForm("SerachProducts" , "Admin" ,FormMethod.Post))
+ {    
+         <p><input type="text" style="margin-right:133px;" name="txtSearch" required value="@ViewBag.txtSearch" />&nbsp;
+         <input type="submit" value="جستجو"  class="button"/></p> 
+ }
+<br />
+<table class="table-full table-total">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Keywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tags)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Summery)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Keywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tags)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Summery)
+        </td>
+        <td>
+            @Html.ActionLink("حذف", "DeleteProduct", new { id=item.ProductId } , new { onclick = "return confirm('جهت حذف مطمئن هستید ؟')" }) |
+            @Html.ActionLink("ویرایش", "EditProduct", new { id=item.ProductId })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+<br />
+<p style="margin-right:40%;">
+    @Html.ActionLink("افزودن محصول جدید", "AddProduct", "Admin", null, new { @class="MyButton"})
+</p>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

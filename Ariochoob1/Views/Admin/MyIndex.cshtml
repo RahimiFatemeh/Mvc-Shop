@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+
+<h2 style="text-align: center;">پنل مدیریت</h2>
+
+<br />
+<br />
+<div style="margin-right:10%">
+    <div class="Mybtn">
+        @Html.ActionLink("+اضافه کردن محصول", "AddProduct", "Admin")
+    </div>
+    <div class="Mybtn">
+        @Html.ActionLink("مدیریت محصولات (ویرایش ،‌حذف ،‌جستجو)", "Products", "Admin")
+    </div>
+    <div class="Mybtn">
+        @Html.ActionLink("مدیریت گروه‌ها(اضافه ،‌حذف‌، ویرایش)", "Groups", "Admin")
+    </div>
+    <div class="Mybtn">
+        @Html.ActionLink("اضافه کردن شرکت", "AddCompany", "Admin")
+    </div>
+    <div class="Mybtn">
+        @Html.ActionLink("اطلاعات کاربران", "GetUserInfo_withsp", "Admin")
+    </div>
+     <div class="Mybtn">
+        @Html.ActionLink("اطلاعات کاربران(store procedure)", "GetUserInfo_withView", "Admin")
+    </div>
+
+</div>
+<br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br />

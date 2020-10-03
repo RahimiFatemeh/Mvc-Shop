@@ -1,0 +1,94 @@
+﻿@model Ariochoob1.ViewModels.Home.HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MyStyle.css" rel="stylesheet" />
+
+<div class="center">
+    <h2>به سادگی  طراحی های سه بعدی اجرای خود را تحویل بگیرید</h2>
+    <p>در مجموعه آریوچوب همه مراحل به گونه‌ای برنامه‌ریزی شده‌اند و تقسیم وظایف کل تیم به‌شکلی انجام‌شده‌است </p>
+    <p>که در کل پروژه شما هیچ مشکلی نداشته باشید و به اصطلاح آب در دل شما تکان نمی‌خورد </p>
+    <p>به محض تمام شدن اجرا نیز همه مورادی که تیم ما موجب بهم ریختگی و کثیفی در آن شده باشند  </p>
+    <p>تمیز کاری شده و به شما تحویل می گردد </p>
+    <br />
+    <div class="row">
+        <div>
+            <img src="~/Content/picture/wood-built_105762-527.jpg" />
+        </div>
+        <div>
+            <img src="~/Content/picture/cabinet-modern-mint-orange-room-japanese.jpg">
+        </div>
+        <div>
+            <img src="~/Content/picture/modern-kitchen.jpg" />
+        </div>
+        <div>
+            <img src="~/Content/picture/2021.gif">
+        </div>
+        <div>
+            <img src="~/Content/picture/images.jfif" />
+        </div>
+        <div>
+            <img src="~/Content/picture/cabinet-zen-empty-room-japanese.jpg" />
+        </div>
+    </div>
+</div>
+
+<div class="sep"></div>
+
+<div class="center2">
+
+    <h2>فروشگاه آریو چوب</h2>
+
+@Html.ActionLink("رفتن به مرحله‌ی بعد", "Buy", null, new { @class = "text MyButton" })
+
+<div>
+    <a id="CartItems"  href="/home/basket">لیست خرید (@{Html.RenderAction("CartCount", "Home");})</a>
+</div>
+
+@foreach (var item in Model.Products)
+{
+    <div class="card">
+        <img src="~/Files/@item.Image" style="width: 100%">
+        <div class="container">
+            <h4><b>@item.Name</b></h4>
+            <p>
+                @item.Price.ToString() تومان
+                <br />
+                <a class="Mybtn" href="#" product="@item.ProductId">افزودن‌به‌سبدخرید</a>
+            </p>
+        </div>
+    </div>
+}
+    </div>
+
+<div class="seprate"></div>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("a.Mybtn").click(function (e) {
+                e.preventDefault();
+                var productId = $(this).attr("product");
+                $.ajax({
+                    url: "/Home/AddToCart",
+                    data: { Id: productId, Count: 1 },
+                    type: "Post",
+                    dataType: "Json",
+                    success: function (result) {
+                        if (result.Success) {
+                            $("#CartItems").html(result.Html);
+                        }
+                        eval(result.Script);
+                    },
+                    error: function () {
+                        alert("خطا!");
+                    }
+                });
+            });
+        });
+    </script>
+}

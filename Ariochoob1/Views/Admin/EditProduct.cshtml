@@ -1,0 +1,141 @@
+﻿@model Ariochoob1.ViewModels.Admin.AddProductViewModel
+
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+
+<h2 style="text-align: center;">ویرایش محصول</h2>
+<br />
+
+<div class="form-layout">
+@using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post , new { enctype = "multipart/form-data"} ))
+{
+    
+    @Html.ValidationSummary(true)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Name)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Name ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Name)
+        </div>
+
+        <div class="editor-label"> 
+            @Html.LabelFor(model => model.Product.GroupId) *
+        </div>
+        <div class="editor-field">
+            @Html.Partial("_GroupList", @Model.Groups, new ViewDataDictionary { { "id", "Product_GroupId" }, { "name", "Product.GroupId" } })
+
+            @*@Html.TextBoxFor(model => model.Product.GroupId)
+            @Html.ValidationMessageFor(model => model.Product.GroupId)*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Price)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Price ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Url)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Url ,new { @class = "Form-block" } )
+            @Html.ValidationMessageFor(model => model.Product.Url)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Keywords)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Keywords ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Keywords)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Description)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Description ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Tags)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Product.Tags ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Tags)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Enable)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Product.Enable)
+            @Html.ValidationMessageFor(model => model.Product.Enable)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Image)*
+        </div>
+        <div class="editor-field">
+            @Html.Upload("UploadImage")
+            @Html.ValidationMessageFor(model => model.Product.Image)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Product.Summery)*
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Product.Summery ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Product.Summery)
+        </div>
+
+        <div>
+            <input type="submit" value="ثبت ویرایش" class="submt-btn" />
+        </div>
+}
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+@section styles{
+    <link href="@Url.Content("~/Scripts/TagsInput/bootstrap-tagsinput.css")" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/AjaxForm/jquery.form.min.js"></script>
+    <script src="@Url.Content("~/Scripts/AutoNumeric/jquery-price.js")"></script>
+    <script src="@Url.Content("~/Scripts/TagsInput/bootstrap-tagsinput.min.js")"></script>
+    @Html.CKEditorHeaderScripts()
+    <script>
+        $(function () {                     //Active plugin
+            $("#Product_Price").price();
+            $("#Product_Summery").ckeditor();
+            $("#Product_Keywords").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
+            }).tagsinput();
+            $("#Product_Tags").keypress(function (event) {
+                if (event.keyCode == 13) {   //13 is Enter , if user press enter prevent
+                    event.preventDefault();
+                }
+            }).tagsinput();
+        });
+        
+    </script>
+}
+

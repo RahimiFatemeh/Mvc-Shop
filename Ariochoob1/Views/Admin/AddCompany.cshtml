@@ -1,0 +1,63 @@
+﻿@model Ariochoob1.Models.DomainModels.Campany
+
+@{
+    ViewBag.Title = "AddCompany";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+
+<h2 style="text-align: center;">اضافه کردن شرکت</h2>
+<br />
+
+<div class="form-layout">
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tel)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Tel ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Tel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)*
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Address ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Email ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <p>
+            <input type="submit" value="افزودن" class="submt-btn" />
+        </p>
+
+}
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

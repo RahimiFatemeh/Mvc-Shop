@@ -1,0 +1,122 @@
+﻿@model  Ariochoob1.ViewModels.Admin.AddGroupViewModel
+
+@{
+    ViewBag.Title = "Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("AddGroup", "Admin", FormMethod.Post, new { id = "groupForm" }))
+   {
+    <div style="display:inline-block">
+        @Html.Partial("_GroupList", Model.Groups, new ViewDataDictionary { { "id", "Group_ParentId" }, { "name", "Group.ParentId" } })
+    </div>
+    
+    <div style="display:inline-block;vertical-align:top;padding-right:40px">
+        
+        <label>نام گروه <span>*</span></label>
+        <div>
+            @Html.TextBoxFor(p => Model.Group.Name, new { @class = "text" })
+            @Html.ValidationMessageFor(p => Model.Group.Name)
+        </div>
+        <br />
+        <button class="button" id="btnAdd">افزودن گروه</button>
+        <button class="button" id="btnEdit">ثبت ویرایش</button>
+        <button class="button" id="btnDelete">&nbsp;&nbsp;حذف گروه&nbsp;&nbsp;</button>
+        
+    </div>     
+}
+<br />
+<br />
+<br />
+<br />
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            //when click on something the text will show in textbox
+            $("#Group_ParentId").click(function () { //every time clicked then execute this function
+                if ($("#Group_ParentId").find(":selected").length > 0) { 
+                    var txt = $("#Group_ParentId").find(":selected").text().trim(); //trim: delete space 
+                    $("#Group_Name").val(txt.substring(1))  //delete + 
+                }
+            });
+            $("#btnAdd").click(function (e) {
+                e.preventDefault();
+                if ($("#groupForm").valid()) { //if from is valid then send to server
+                    $.ajax({
+                        url: "/Admin/AddGroup",
+                        data: $("#groupForm").serialize(),
+                        type: "Post",
+                        dataType: "Json",
+                        success: function (result) {
+                            if (result.Success) {
+                                $("#divGroupList").html(result.Html);
+                            }
+                            eval(result.Script);
+                        },
+                        error: function () {
+                            alert("خطا!");
+                        }
+                    });
+                }
+            });
+            $("#btnDelete").click(function (e) {
+                e.preventDefault();
+                if ($("#Group_ParentId").find(":selected").length > 0) { //if something selected
+                    $.ajax({
+                        url: "/Admin/DeleteGroup",
+                        data: { id: $("#Group_ParentId").find(":selected").val() },
+                        type: "Post",
+                        dataType: "Json",
+                        success: function (result) {
+                            if (result.Success) {
+                                $("#divGroupList").html(result.Html);
+                            }
+                            eval(result.Script);
+                        },
+                        error: function () {
+                            alert("خطا!");
+                        }
+                    });
+                }
+                else {
+                    alert("ابتدا گروه را انتخاب کنید");
+                }
+            });
+            $("#btnEdit").click(function (e) {
+                e.preventDefault();
+                if ($("#groupForm").valid()) {
+                    if ($("#Group_ParentId").find(":selected").length > 0) {
+                        $.ajax({
+                            url: "/Admin/EditGroup",
+                            data: {
+                                GroupId: $("#Group_ParentId").find(":selected").val(),
+                                Name: $("#Group_Name").val(),
+                                ParentId: $("#Group_ParentId").find(":selected").attr("parentid")
+                            },
+                            type: "Post",
+                            dataType: "Json",
+                            success: function (result) {
+                                if (result.Success) {
+                                    $("#divGroupList").html(result.Html);
+                                }
+                                eval(result.Script);
+                            },
+                            error: function () {
+                                alert("خطا!");
+                            }
+                        });
+                    }
+                    else {
+                        alert("ابتدا گروه را انتخاب کنید");
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="~/Content/css/layout.css" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+        @RenderSection("styles", false)
+    </head>
+<body>
+
+    <!-- section -->
+    <section>
+        <div id="first">
+            <div class="logo">
+                <img src="~/Content/picture/logo.jfif">
+            </div>
+            <!--logo-->
+            <div class="button">
+                <a href="#" class="btn">ورود </a>
+                <span>&nbsp;|&nbsp;</span>
+                <a href="#" class="btn">عضویت</a>
+                <span>&nbsp;|&nbsp;</span>
+                <a href="#" class="btn">پنل مدیریت </a>
+                <span>&nbsp;|&nbsp;</span>
+                <a href="#" class="btn">راهنما </a>
+            </div>
+            <!--burron-->
+        </div>
+        <!--first-->
+    </section>
+    <!-- section -->
+
+    <div class="sepretor"></div>
+
+    <section id="header">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </section>
+
+
+   
+
+    <section>
+        <footer>
+            <div id="foot">
+                <div id="m">
+                    <div id="color"></div>
+                    <p>
+                        اگر به دنبال طراحی در دکوراسیون معماری ، زیبا سازی محیط زندگی یا محل کارتان همچنین تغییر و بازسازی در آن هستید
+                             با شرکت طراحان دکور آریوچوب همراه باشید.
+                    </p>
+                    <a href="#">لینک کابینت سازی ها </a>
+                </div>
+
+                <div id="n">
+                    <div id="color"></div>
+                    <p>تماس با آریوچوب </p>
+                    <a href="#">درباره آریوچوب </a>     
+                </div>
+
+                <div id="b">
+                    <div id="color"></div>
+                    <p>کابینت سازی ‌ها </p>
+                    <a href="#">ثبت کابینت سازی </a>
+                </div>
+
+                <div id="v">
+                    <div id="color"></div>
+                    <p>پشتیبانی آریو چوب </p>
+                </div>
+
+                <div id="c">
+                    <div id="color"></div>
+                    <p>اپلیکیشن‌های موبایل</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

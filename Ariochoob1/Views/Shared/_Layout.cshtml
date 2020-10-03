@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/css/layout.css" />
+
+@*    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", false)
+
+    <link href="~/Content/css/layout1.css" rel="stylesheet" />
+</head>
+<body>
+    <section id="first">
+        <div class="buton">
+            <a class="btn" href="/Home/Index">خانه</a>
+            <span>&nbsp;|&nbsp;</span>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="btn" href="/Home/LogOut">خروج از سایت</a>
+            }
+            else
+            {
+                <a class="btn" href="/Home/Login">ورود</a>
+            }
+
+            <span>&nbsp;|&nbsp;</span>
+            <a class="btn" href="/Home/Register">عضویت </a>
+            <span>&nbsp;|&nbsp;</span>
+            <a class="btn" href="/Admin/MyIndex">پنل مدیریت</a>
+        </div>
+        <!--burron-->
+    </section>
+    <!--first-->
+    <div class="navar"></div>
+
+    <div id="header"></div>
+    <!--header-->
+
+    <section>
+        <div class="Body">
+            @RenderBody()
+        </div>
+    </section>
+
+    <section class="footer">
+        <div id="p">
+            <p>
+                اگر به دنبال طراحی در دکوراسیون معماری ، زیبا سازی محیط زندگی یا محل کارتان همچنین تغییر و بازسازی در آن هستید
+                             با شرکت طراحان دکور آریوچوب همراه باشید.
+                آدرس ما : قم  ، گلزار شهدا  ،‌بلوار شهید روحانی
+
+            </p>
+        <div class="seprete"></div>
+        </div>
+        <div id="A">
+            <div id="color"></div>
+            <p>تماس با آریوچوب </p>
+        </div>
+        <div id="B">
+            <div id="color"></div>
+            <p>درباره‌ی آریوچوب </p>
+        </div>
+        <div id="C">
+            <div id="color"></div>
+            <p> قوانین و مقررات </p>
+        </div>
+    </section>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

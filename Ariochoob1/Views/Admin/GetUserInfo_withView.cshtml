@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Ariochoob1.Models.DomainModels.GetUserWithView>
+
+@{
+    ViewBag.Title = "GetUserInfo_withView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MyStyle.css" rel="stylesheet" />
+
+<br />
+<br />
+<br />
+
+<h2 style="text-align: center;"> اطلاعات کاربران </h2>
+
+<br />
+
+
+<table class="table-full table-total">
+        <tr>
+            <th> نام  کاربر</th>
+            <th> ایمیل </th>
+            <th> شماره تلفن </th>
+            <th> موبایل </th>
+        </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>  @Html.DisplayFor(pp => item.Name) </td>
+            <td>  @Html.DisplayFor(pp => item.Username)
+            <td>  @Html.DisplayFor(pp => item.Tel)
+            <td>  @Html.DisplayFor(pp => item.Mobile)
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

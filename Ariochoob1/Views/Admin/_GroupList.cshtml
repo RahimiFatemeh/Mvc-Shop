@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Ariochoob1.Models.DomainModels.Group>
+
+@helper AddOption(int? parentId, string space)
+{
+    foreach (var item in Model.Where(p => p.ParentId == parentId).ToList())
+    {
+    <option value="@item.GroupId" parentid="@item.ParentId">@space + @item.Name</option>
+    @Html.Raw(HttpUtility.HtmlDecode(AddOption(item.GroupId, space + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").ToString()));
+    }
+}
+
+<div id="divGroupList">
+    <select id="@ViewData["id"]" name="@ViewData["name"]" size="15" style="width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+        <option value="">گروه اصلی</option>
+        @AddOption(null, "")
+    </select>
+</div>

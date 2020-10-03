@@ -1,0 +1,100 @@
+﻿@model Ariochoob1.Models.DomainModels.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2 style="text-align: center;">ثبت نام</h2>
+<br />
+
+<div class="form-layout">
+@using (Ajax.BeginForm("Register", "Home", new AjaxOptions { HttpMethod = "Post", Url = "/Home/Register" })){
+    
+        @Html.ValidationSummary(true)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)*
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Username ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)*
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)*
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.ConfirmPassword ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BirthDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BirthDate ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.BirthDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mobile)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Mobile ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Mobile)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tel)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Tel ,new { @class = "Form-block" })
+            @Html.ValidationMessageFor(model => model.Tel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            <select id="Gender" name="Gender" class="text">
+                <option value="True">مرد</option>
+                <option value="False">زن</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <p>
+            <input type="submit" value="افزودن" class="submt-btn" />
+        </p>    
+}
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

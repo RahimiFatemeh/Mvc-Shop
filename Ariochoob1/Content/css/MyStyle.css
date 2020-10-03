@@ -1,0 +1,188 @@
+﻿.table-full
+{ 
+    margin-right: 133px;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+    .table-full td, .table-full th
+    {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+
+    }
+
+    .table-full tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+
+    .table-full tr:hover
+    {
+        background-color: #ddd;
+    }
+
+    .table-full th
+    {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #209ebb;
+        color: white;
+    }
+
+.center
+{
+    height: 900px;
+    background-color: #fff;
+}
+
+.center p
+{
+    font-family: 'IRDast Nevis';
+    text-align: center;
+    font-weight: bold;
+}
+
+.center h2
+{
+    font-family: 'IRDast Nevis';
+    text-align: center;
+    padding-top: 55px;
+    padding-bottom: 20px;
+    font-weight: bolder;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+}
+
+.row img
+{
+    float: right;
+    width: 31%;
+    padding: 10px;
+    height: 270px;
+}
+
+.My-table
+{
+    padding: 8px;
+    margin-right: 130px;
+    width: 90%;
+    
+}
+.My-table tr td img
+{
+    float: right;
+    width: 31%;
+    padding: 10px;
+    height: 250px;
+}
+        
+
+.My-table td, .My-table th
+    {
+        text-align: right;
+
+    }
+
+/*---------------------------------------------------*/
+.center2
+{
+    height: auto ;
+    background-color: #fff;
+}
+
+.center2 p
+{
+    text-align: center;
+    font-weight: bold;
+}
+.center2 h2
+{
+    font-family: 'IRDast Nevis';
+    text-align: center;
+    padding-top: 55px;
+    padding-bottom: 20px;
+    font-weight: bolder;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+}
+/*---------------------------------------------------*/
+
+
+/*.table-full
+{ 
+    margin-right: 133px;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+    .table-full td, .table-full th
+    {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+
+    }
+
+    .table-full tr:nth-child(even)
+    {
+        background-color: #f2f2f2;
+    }
+
+    .table-full tr:hover
+    {
+        background-color: #ddd;
+    }
+
+    .table-full th
+    {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #209ebb;
+        color: white;
+    }
+
+.center
+{
+    height: 820px;
+    background-color: #fff;
+}
+
+.center p
+{
+    font-family: 'IRDast Nevis';
+    text-align: center;
+    font-weight: bold;
+}
+
+.center h2
+{
+    font-family: 'IRDast Nevis';
+    text-align: center;
+    padding-top: 55px;
+    padding-bottom: 20px;
+    font-weight: bolder;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+}
+
+.row img
+{
+    float: right;
+    width: 25%;
+    padding: 10px;
+    width: 31%;
+    height: 200px;
+}
+
+.My-table
+{
+    padding: 8px;
+    margin-right: 130px;
+    width: 80%;
+}
+.My-table td, .My-table th
+    {
+        text-align: right;
+    }*/

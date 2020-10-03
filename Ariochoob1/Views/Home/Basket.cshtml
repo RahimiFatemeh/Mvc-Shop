@@ -1,0 +1,134 @@
+﻿@model List<BasketViewModel>
+
+@{
+    ViewBag.Title = "Basket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MyStyle.css" rel="stylesheet" />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2 style="text-align: center;">سبد خرید</h2>
+<br />
+<br />
+<br />
+@using (Html.BeginForm("AddGroup", "Admin", FormMethod.Post, new { id = "myForm" }))
+{
+    <table class="table-full table-total">
+        <tr>
+            <th>
+                @Html.DisplayName("تصویر")
+            </th>
+            <th>
+                @Html.DisplayName("نام محصول")
+            </th>
+            <th>
+                @Html.DisplayName("قیمت")
+            </th>
+            <th>
+                @Html.DisplayName("تعداد")
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~Files/UploadImage/@item.Product.Image" width:"80px" />
+                </td>
+                <td>
+                    <img src="~/Content/picture/delete.png" alt="حذف محصول" style="cursor:pointer;" class="deleteProduct" productid="@item.Product.ProductId" />
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+
+                </td>
+                <td>
+                    @item.Product.Price.ToString().Trim('.')
+                </td>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.Count, new { @class = "text txtCountProduct", style = "width:40px; height:5px;", productid = item.Product.ProductId })
+                </td>
+
+            </tr>
+           
+        }
+    </table>
+    <table class="table-full table-total" style="background-color:#d0cbcb">
+        <tr>
+            <td>
+                جمع کل:
+                @ViewBag.pice
+            </td>
+        </tr>
+    </table>
+    <br />
+    <br />
+  
+    <button class="button" style="margin-right: 40%">ثبت اطلاعات و اتصال به درگاه بانکی</button>
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+@section Scripts{
+    <script src="~/Scripts/AutoNumeric/jquery-price.js"></script>
+    <script>
+        $(function () {
+            $(".txtCountProduct").price();
+
+            $(".deleteProduct").click(function () {
+                var id = $(this).attr("productid");
+                var img = $(this);
+                $.ajax({
+                    url: "/Home/RemoveCart",
+                    data: { Id: id },
+                    type: "Post",
+                    dataType: "Json",
+                    success: function (result) {
+                        if (result.Success) {
+                            img.parent().parent().hide(); //دو تگ برو بالا و اینطوری سطر حذف میشه
+                            $("#CartItems").html(result.Html);
+                        }
+                        eval(result.Script);
+                    },
+                    error: function () {
+                        alert("خطا!");
+                    }
+                });
+            });
+
+            $(".txtCountProduct").change(function () {
+                var count = $(this).val();
+                var id = $(this).attr("productid");
+                $.ajax({
+                    url: "/Home/AddToCart",
+                    data: { Id: id, Count: count },
+                    type: "Post",
+                    dataType: "Json",
+                    success: function (result) {
+                        if (result.Success) {
+                            $("#CartItems").html(result.Html);
+                        }
+                        eval(result.Script);
+                    },
+                    error: function () {
+                        alert("خطا!");
+                    }
+                });
+            });
+        });
+    </script>
+}

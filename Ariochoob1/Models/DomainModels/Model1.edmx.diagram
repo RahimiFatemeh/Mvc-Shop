@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4fb4b28bf4f4c63910ac9742f30ab53" Name="Diagram1">
+        <EntityTypeShape EntityType="AriochoobDBModel.BuyFactor" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.Campany" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.Group" Width="1.5" PointX="1.5" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.Message" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.Order" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.Product" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.SaleFactor" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.User" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AriochoobDBModel.GetUserWithView" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="AriochoobDBModel.FK_BuyFactors_Campanies" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.FK_Products_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.FK_Orders_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.FK_SaleFactors_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.Products_BuyFactors" ManuallyRouted="false" />
+        <AssociationConnector Association="AriochoobDBModel.Users_SaleFactors" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

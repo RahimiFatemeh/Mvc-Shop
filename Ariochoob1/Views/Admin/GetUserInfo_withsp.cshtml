@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Ariochoob1.Models.DomainModels.GetUserInf_Result>
+@{
+    ViewBag.Title = "GetUserInfo_withsp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/MyStyle.css" rel="stylesheet" />
+
+<br />
+<br />
+<br />
+<h2 style="text-align: center;">اطلاعات کاربران</h2>
+<br />
+
+
+<table class="table-full table-total">
+    <tr>
+        <th>
+            نام و نام خانوادگی
+        </th>
+        <th>
+           تلفن
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(aa => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(aa => item.Tel)
+        </td>
+       
+
+    </tr>
+}
+
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

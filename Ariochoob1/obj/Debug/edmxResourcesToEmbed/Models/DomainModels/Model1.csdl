@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AriochoobDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="AriochoobDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BuyFactors" EntityType="AriochoobDBModel.BuyFactor" />
+    <EntitySet Name="Campanies" EntityType="AriochoobDBModel.Campany" />
+    <EntitySet Name="Groups" EntityType="AriochoobDBModel.Group" />
+    <EntitySet Name="Messages" EntityType="AriochoobDBModel.Message" />
+    <EntitySet Name="Orders" EntityType="AriochoobDBModel.Order" />
+    <EntitySet Name="Products" EntityType="AriochoobDBModel.Product" />
+    <EntitySet Name="SaleFactors" EntityType="AriochoobDBModel.SaleFactor" />
+    <EntitySet Name="Users" EntityType="AriochoobDBModel.User" />
+    <EntitySet Name="GetUserWithViews" EntityType="AriochoobDBModel.GetUserWithView" />
+    <AssociationSet Name="FK_BuyFactors_Campanies" Association="AriochoobDBModel.FK_BuyFactors_Campanies">
+      <End Role="Campanies" EntitySet="Campanies" />
+      <End Role="BuyFactors" EntitySet="BuyFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Groups" Association="AriochoobDBModel.FK_Products_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Products" Association="AriochoobDBModel.FK_Orders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="AriochoobDBModel.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleFactors_Users" Association="AriochoobDBModel.FK_SaleFactors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SaleFactors" EntitySet="SaleFactors" />
+    </AssociationSet>
+    <AssociationSet Name="Products_BuyFactors" Association="AriochoobDBModel.Products_BuyFactors">
+      <End Role="BuyFactors" EntitySet="BuyFactors" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="Users_SaleFactors" Association="AriochoobDBModel.Users_SaleFactors">
+      <End Role="SaleFactors" EntitySet="SaleFactors" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="GetUserInf" ReturnType="Collection(AriochoobDBModel.GetUserInf_Result)" />
+  </EntityContainer>
+  <EntityType Name="BuyFactor">
+    <Key>
+      <PropertyRef Name="BuyFactorId" />
+    </Key>
+    <Property Name="BuyFactorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Price" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="Campany" Relationship="AriochoobDBModel.FK_BuyFactors_Campanies" FromRole="BuyFactors" ToRole="Campanies" />
+    <NavigationProperty Name="Products" Relationship="AriochoobDBModel.Products_BuyFactors" FromRole="BuyFactors" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Campany">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Tel" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="BuyFactors" Relationship="AriochoobDBModel.FK_BuyFactors_Campanies" FromRole="Campanies" ToRole="BuyFactors" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="AriochoobDBModel.FK_Products_Groups" FromRole="Groups" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="WebSite" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="IsRead" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SaleFactorId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Qty" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="AriochoobDBModel.FK_Orders_Products" FromRole="Orders" ToRole="Products" />
+    <NavigationProperty Name="User" Relationship="AriochoobDBModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Keywords" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="Tags" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Like" Type="Int32" Nullable="false" />
+    <Property Name="Dislike" Type="Int32" Nullable="false" />
+    <Property Name="Enable" Type="Boolean" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Summery" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Group" Relationship="AriochoobDBModel.FK_Products_Groups" FromRole="Products" ToRole="Groups" />
+    <NavigationProperty Name="Orders" Relationship="AriochoobDBModel.FK_Orders_Products" FromRole="Products" ToRole="Orders" />
+    <NavigationProperty Name="BuyFactors" Relationship="AriochoobDBModel.Products_BuyFactors" FromRole="Products" ToRole="BuyFactors" />
+  </EntityType>
+  <EntityType Name="SaleFactor">
+    <Key>
+      <PropertyRef Name="SaleFactorId" />
+    </Key>
+    <Property Name="SaleFactorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FillowCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="400" Unicode="true" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <NavigationProperty Name="User" Relationship="AriochoobDBModel.FK_SaleFactors_Users" FromRole="SaleFactors" ToRole="Users" />
+    <NavigationProperty Name="Users" Relationship="AriochoobDBModel.Users_SaleFactors" FromRole="SaleFactors" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="Mobile" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Tel" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Gender" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Orders" Relationship="AriochoobDBModel.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+    <NavigationProperty Name="SaleFactors" Relationship="AriochoobDBModel.FK_SaleFactors_Users" FromRole="Users" ToRole="SaleFactors" />
+    <NavigationProperty Name="SaleFactors1" Relationship="AriochoobDBModel.Users_SaleFactors" FromRole="Users" ToRole="SaleFactors" />
+  </EntityType>
+  <EntityType Name="GetUserWithView">
+    <Key>
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Tel" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_BuyFactors_Campanies">
+    <End Role="Campanies" Type="AriochoobDBModel.Campany" Multiplicity="1" />
+    <End Role="BuyFactors" Type="AriochoobDBModel.BuyFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campanies">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="BuyFactors">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Groups">
+    <End Role="Groups" Type="AriochoobDBModel.Group" Multiplicity="1" />
+    <End Role="Products" Type="AriochoobDBModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Products">
+    <End Role="Products" Type="AriochoobDBModel.Product" Multiplicity="1" />
+    <End Role="Orders" Type="AriochoobDBModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Role="Users" Type="AriochoobDBModel.User" Multiplicity="1" />
+    <End Role="Orders" Type="AriochoobDBModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="SaleFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleFactors_Users">
+    <End Role="Users" Type="AriochoobDBModel.User" Multiplicity="1" />
+    <End Role="SaleFactors" Type="AriochoobDBModel.SaleFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SaleFactors">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Products_BuyFactors">
+    <End Role="BuyFactors" Type="AriochoobDBModel.BuyFactor" Multiplicity="*" />
+    <End Role="Products" Type="AriochoobDBModel.Product" Multiplicity="*" />
+  </Association>
+  <Association Name="Users_SaleFactors">
+    <End Role="SaleFactors" Type="AriochoobDBModel.SaleFactor" Multiplicity="*" />
+    <End Role="Users" Type="AriochoobDBModel.User" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="GetUserInf_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Tel" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

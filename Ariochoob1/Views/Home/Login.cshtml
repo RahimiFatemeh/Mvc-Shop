@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center ; color:red;">
+    @ViewBag.Message
+</div>
+
+<br />
+<br />
+
+<h2 style="text-align: center;">ورود به سایت</h2>
+
+<br />
+<br />
+
+<div class="form-layout">
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.Label("نام کاربری")
+        @Html.TextBox("Username", null, new { @class ="Form-block" })
+    </div>
+    <div>
+        @Html.Label("رمزعبور")
+        @Html.Password("Password", null, new { @class = "Form-block" })
+    </div>
+    <br />
+    <div>
+    @Html.Label("مرا به خاطر بسپار", new { @for = "RememberMe"})
+    @Html.CheckBox("RememberMe")
+    </div>
+
+    <input type="submit" value="ورود" class="submt-btn" />
+}
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AriochoobDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="AriochoobDBModelStoreContainer">
+    <EntitySet Name="BuyFactors" EntityType="AriochoobDBModel.Store.BuyFactors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Campanies" EntityType="AriochoobDBModel.Store.Campanies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="AriochoobDBModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="AriochoobDBModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="AriochoobDBModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="AriochoobDBModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products_BuyFactors" EntityType="AriochoobDBModel.Store.Products_BuyFactors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SaleFactors" EntityType="AriochoobDBModel.Store.SaleFactors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="AriochoobDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_SaleFactors" EntityType="AriochoobDBModel.Store.Users_SaleFactors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GetUserWithView" EntityType="AriochoobDBModel.Store.GetUserWithView" store:Type="Views" store:Schema="dbo" store:Name="GetUserWithView">
+      <DefiningQuery>SELECT 
+      [GetUserWithView].[Username] AS [Username], 
+      [GetUserWithView].[Name] AS [Name], 
+      [GetUserWithView].[Mobile] AS [Mobile], 
+      [GetUserWithView].[Tel] AS [Tel]
+      FROM [dbo].[GetUserWithView] AS [GetUserWithView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_BuyFactors_Campanies" Association="AriochoobDBModel.Store.FK_BuyFactors_Campanies">
+      <End Role="Campanies" EntitySet="Campanies" />
+      <End Role="BuyFactors" EntitySet="BuyFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Products" Association="AriochoobDBModel.Store.FK_Orders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="AriochoobDBModel.Store.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_BuyFactors_BuyFactors" Association="AriochoobDBModel.Store.FK_Products_BuyFactors_BuyFactors">
+      <End Role="BuyFactors" EntitySet="BuyFactors" />
+      <End Role="Products_BuyFactors" EntitySet="Products_BuyFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_BuyFactors_Products" Association="AriochoobDBModel.Store.FK_Products_BuyFactors_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Products_BuyFactors" EntitySet="Products_BuyFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Groups" Association="AriochoobDBModel.Store.FK_Products_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleFactors_Users" Association="AriochoobDBModel.Store.FK_SaleFactors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="SaleFactors" EntitySet="SaleFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_SaleFactors_SaleFactors" Association="AriochoobDBModel.Store.FK_Users_SaleFactors_SaleFactors">
+      <End Role="SaleFactors" EntitySet="SaleFactors" />
+      <End Role="Users_SaleFactors" EntitySet="Users_SaleFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_SaleFactors_Users" Association="AriochoobDBModel.Store.FK_Users_SaleFactors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_SaleFactors" EntitySet="Users_SaleFactors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BuyFactors">
+    <Key>
+      <PropertyRef Name="BuyFactorId" />
+    </Key>
+    <Property Name="BuyFactorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="Campanies">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ParentId" Type="int" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SaleFactorId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Qty" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="Url" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Keywords" Type="nvarchar" MaxLength="300" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Tags" Type="nvarchar" MaxLength="200" />
+    <Property Name="Like" Type="int" Nullable="false" />
+    <Property Name="Dislike" Type="int" Nullable="false" />
+    <Property Name="Enable" Type="bit" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+    <Property Name="Summery" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Products_BuyFactors">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="BuyFactorsId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="BuyFactorsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SaleFactors">
+    <Key>
+      <PropertyRef Name="SaleFactorId" />
+    </Key>
+    <Property Name="SaleFactorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BuyDate" Type="datetime" Nullable="false" />
+    <Property Name="FillowCode" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="400" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users_SaleFactors">
+    <Key>
+      <PropertyRef Name="SaleFactorId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="SaleFactorId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AriochoobDB.dbo.GetUserWithView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="GetUserWithView">
+    <Key>
+      <PropertyRef Name="Username" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_BuyFactors_Campanies">
+    <End Role="Campanies" Type="AriochoobDBModel.Store.Campanies" Multiplicity="1" />
+    <End Role="BuyFactors" Type="AriochoobDBModel.Store.BuyFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campanies">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="BuyFactors">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Products">
+    <End Role="Products" Type="AriochoobDBModel.Store.Products" Multiplicity="1" />
+    <End Role="Orders" Type="AriochoobDBModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Role="Users" Type="AriochoobDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Orders" Type="AriochoobDBModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="SaleFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_BuyFactors_BuyFactors">
+    <End Role="BuyFactors" Type="AriochoobDBModel.Store.BuyFactors" Multiplicity="1" />
+    <End Role="Products_BuyFactors" Type="AriochoobDBModel.Store.Products_BuyFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuyFactors">
+        <PropertyRef Name="BuyFactorId" />
+      </Principal>
+      <Dependent Role="Products_BuyFactors">
+        <PropertyRef Name="BuyFactorsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_BuyFactors_Products">
+    <End Role="Products" Type="AriochoobDBModel.Store.Products" Multiplicity="1" />
+    <End Role="Products_BuyFactors" Type="AriochoobDBModel.Store.Products_BuyFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Products_BuyFactors">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Groups">
+    <End Role="Groups" Type="AriochoobDBModel.Store.Groups" Multiplicity="1" />
+    <End Role="Products" Type="AriochoobDBModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleFactors_Users">
+    <End Role="Users" Type="AriochoobDBModel.Store.Users" Multiplicity="1" />
+    <End Role="SaleFactors" Type="AriochoobDBModel.Store.SaleFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SaleFactors">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_SaleFactors_SaleFactors">
+    <End Role="SaleFactors" Type="AriochoobDBModel.Store.SaleFactors" Multiplicity="1" />
+    <End Role="Users_SaleFactors" Type="AriochoobDBModel.Store.Users_SaleFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SaleFactors">
+        <PropertyRef Name="SaleFactorId" />
+      </Principal>
+      <Dependent Role="Users_SaleFactors">
+        <PropertyRef Name="SaleFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_SaleFactors_Users">
+    <End Role="Users" Type="AriochoobDBModel.Store.Users" Multiplicity="1" />
+    <End Role="Users_SaleFactors" Type="AriochoobDBModel.Store.Users_SaleFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Users_SaleFactors">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetUserInf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <!--Errors Found During Generation:
+      warning 6013: The table/view 'AriochoobDB.dbo.Settings' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="Settings">
+        <Property Name="ContactUs" Type="ntext" />
+        <Property Name="AboutUs" Type="ntext" />
+        <Property Name="Help" Type="ntext" />
+        <Property Name="PrivacyPolicy" Type="ntext" />
+        <Property Name="Title" Type="nvarchar" MaxLength="100" />
+        <Property Name="Keywords" Type="nvarchar" MaxLength="100" />
+        <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        <Property Name="SmtpServer" Type="varchar" MaxLength="50" />
+        <Property Name="EmailPassword" Type="varchar" MaxLength="50" />
+        <Property Name="EmailSenderName" Type="nvarchar" MaxLength="50" />
+      </EntityType>-->
+</Schema>
